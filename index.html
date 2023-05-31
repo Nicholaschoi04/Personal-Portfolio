@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Portfolio Website</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/f432a4d9ed.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="header">
+    <div class="container">
+        <nav>
+            <img src="logo.png" class="logo">
+            <ul>
+                <li><a href="#header">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="header-text">
+            <p>Software Engineer</p>
+            <h1>Hi, I'm <span>Nicholas</span><br>from Toronto</h1>
+        </div>
+    </div>
+</div>
+<div id="about">
+    <div class="container">
+        <div class="row">
+            <div class="about-col-1">
+                <img src="user.png">
+            </div>
+            <div class="about-col-2">
+                <h1 class="sub-title">About Me</h1>
+                <p>I am a meticulous student studying computer science at Western University with AEO status 
+                    to the Richard Ivey School of Business. At heart, I am deeply passionate about tech and I am deeply 
+                    engrossed in the variety available. Varying from writing python scripts, to automating financial analysis, 
+                    to building websites, I am interested in every aspect of the modern workspace.</p>
+
+                    <div class="tab-titles">
+                        <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                        <p class="tab-links" onclick="opentab('experience')">Experience</p>
+                        <p class="tab-links" onclick="opentab('education')">Education</p>
+                    </div>
+                    <div class="tab-contents active-tab" id="skills">
+                        <ul>
+                            <li><span>Languages & Development</span><br>Java, Python, SQL, JavaScript, HTML/CSS, Bash, Git, Github, VS Code, Visual Studio, PyCharm, Intellij</li>
+                            <li><span>Frameworks & Libraries</span><br>React, Node.js, Flask, FastAPI, pandas, NumPy, Matplotlib, Pygame, Turtle</li>
+                            <li><span>General</span><br>Full Stack Development, Data Structures and Algorithms, Object Oriented Programming, Web Development,
+                                Information Systems and Design</li>
+                        </ul>
+                    </div>
+                    <div class="tab-contents" id="experience">
+                        <ul>
+                            <li><span>Scotiabank - Data Analyst</span><br>Pioneered new compliance policies and frameworks that improved risk mitigation by 33% by conducting in-depth research and analysis on industry issues and practices</li>
+                            <li><span>Woodward Capital - Private Equity Analyst</span><br>Sourced 30+ weekly leads and a pipeline of 500+ potential acquisition targets for businesses with EBITDA of $1M to $5M by leveraging industry contacts and utilizing CrunchBase, Hunter.io, and ZoomInfo</li>
+                        </ul>
+                    </div>
+                    <div class="tab-contents" id="education">
+                        <ul>
+                            <li><span>Western University, Ivey Business School</span><br>Intend on pursuing a dual degree with computer science and an HBA at the Richard Ivey Business School. I obtain a scholarship of distinction [$3000] and have advanced entry opportunity to the Richard Ivey Business School.</li>
+                        </ul>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="contact-left">
+                <h1 class="sub-title">Contact Me</h1>
+                <p><i class="fa-sharp fa-solid fa-paper-plane"></i> nicholaschoi04@gmail.com</p>
+                <p><i class="fa-solid fa-phone"></i> 416-893-3176</p>
+                <div class="social-icons">
+                    <a href="https://www.linkedin.com/in/nicholas-choi-1b65361b3/"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://github.com/Nicholaschoi04"><i class="fa-brands fa-github"></i></a>
+                </div>
+                <a href="resume.pdf" download class="btn">Download Resume</a>
+            </div>
+            <div class="contact-right">
+                <form name="submit-to-google-sheet">
+                    <input type="text" name="Name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+                    <button type="submit" class="btn">Submit</button>
+                </form>
+                <span id="msg"></span>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>Copyright @ Nicholas. Made with <i class="fa-solid fa-heart"></i></p>
+    </div>
+</div>
+
+<script>
+
+    var tablinks = document.getElementsByClassName("tab-links");
+    var tabcontents = document.getElementsByClassName("tab-contents");
+    function opentab(tabname){
+        for(tablink of tablinks){
+            tablink.classList.remove("active-link");
+        }
+        for(tabcontent of tabcontents){
+            tabcontent.classList.remove("active-tab");
+        }
+        event.currentTarget.classList.add("active-link");
+        document.getElementById(tabname).classList.add("active-tab");
+    }
+
+
+</script>
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxcnJZiNp7s-vPNbHn9j--tNsBpDcM68-sS3HB7IH5MjY5L2TMfF1okUXfBFWXNrup_/exec'
+    const form = document.forms['submit-to-google-sheet']
+    const msg = document.getElementById("msg")
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => {
+            msg.innerHTML = "Message sent successfully"
+            setTimeout(function(){
+                msg.innerHTML = ""
+            },5000)
+            form.reset()
+        })
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
+</body>
+</html>
